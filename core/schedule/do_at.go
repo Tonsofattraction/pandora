@@ -36,10 +36,12 @@ type doAtSchedule struct {
 }
 
 func (s *doAtSchedule) Start(startAt time.Time) {
-	s.MarkStarted()
-	s.startOnce.Do(func() {
-		s.start = startAt
-	})
+	if startAt != time.Now() {
+		s.MarkStarted()
+		s.startOnce.Do(func() {
+			s.start = startAt
+		})
+	}
 }
 
 func (s *doAtSchedule) Next() (tx time.Time, ok bool) {
