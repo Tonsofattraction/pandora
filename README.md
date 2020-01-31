@@ -13,14 +13,21 @@ Pandora is a high-performance load generator in Go language. It has built-in HTT
 [Download](https://github.com/yandex/pandora/releases) available.
 
 ### Building from sources
-We use [dep](https://github.com/golang/dep) for package management. Install it before compiling Pandora
-Compile a binary with go tool (use go >= 1.8.3):
+We use go 1.11 modules.
+If you build pandora inside $GOPATH, please make sure you have env variable `GO111MODULE` set to `on`.
 ```bash
-go get github.com/yandex/pandora
-cd $GOPATH/src/github.com/yandex/pandora
-dep ensure
+git clone https://github.com/yandex/pandora.git
+cd pandora
+make deps
 go install
 ```
+
+Or let [Yandex.Tank](https://yandextank.readthedocs.io/en/latest/core_and_modules.html#pandora) make it easy for you.
+
+
+## Extension points
+
+You can write plugins with the next [extension points](https://github.com/progrium/go-extpoints):
 
 You can also cross-compile for other arch/os:
 ```
@@ -28,7 +35,7 @@ GOOS=linux GOARCH=amd64 go build
 ```
 
 ### Running your tests
-Run the binary with your config (see config examples at [examples](https://github.com/yandex/pandora/tree/master/cli/config)):
+Run the binary with your config (see config examples at [examples](https://github.com/yandex/pandora/tree/develop/examples)):
 
 ```bash
 # $GOBIN should be added to $PATH
